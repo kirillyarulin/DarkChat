@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>DarkChat</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--<meta name="_csrf" th:content="${_csrf.token}"/>-->
+    <!--<meta name="_csrf_header" th:content="${_csrf.headerName}"/>-->
+
+    <script th:src="@{./js/stomp.js}"></script>
+    <script th:src="@{./js/sockjs.min.js}"></script>
+
+    <link rel="stylesheet" type="text/css" th:href="@{css/default.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{css/home.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script th:inline="javascript">
+        //Задание начальных объектов
+        let allUsers = /*[[${allUsers}]]*/ allUsers;
+        let currentUser = /*[[${user}]]*/ currentUser;
+        let userChats = /*[[${userChats}]]*/ userChats;
+    </script>
+
+</head>
+
+<body>
+<div class="header">
+    <div class="header-logo">DarkChat</div>
+    <div class="header-current-user">
+        <div class="header-current-user__avatar">
+            <img th:src="${user.getPhoto()}">
+        </div>
+        <div class="header-current-user__username" th:text="${user.getUsername()}"></div>
+        <div class="header-settings">
+
+        </div>
+    </div>
+
+    <a th:href="@{/logout}" class="header-exit" id="js-header-exit">Exit</a>
+</div>
+<div class="main-wrapper">
+    <div class="page-body">
+        <div class="side-bar">
+
+            <div class="search-chat-wr">
+                <form class="search-chat" action="#">
+                    <div class="search-chat-magnifier-icon"><i class="fa fa-search"></i></div>
+                    <input type="text" placeholder="Поиск.." name="search-chat" id="js-search-chat-input">
+                </form>
+            </div>
+
+
+            <div class="chat-list-wr">
+                <div class="chat-list" id="js-chat-list">
+
+                    <template id="chatItemTemplate">
+                        <div class="chat-item" id="js-chat-item">
+                            <div class="chat-item__avatar">
+                                <img id="js-chat-item-photo">
+                            </div>
+                            <div class="chat-item_content">
+                                <div class="chat-item__content_name" id="js-chat-item_name"></div>
+                                <div class="chat-item__content_last-message" id="js-chat-item_last-message"></div>
+                                <div class="chat-item__content_time-of-last-message" id="js-chat-item_time"></div>
+                            </div>
+                        </div>
+                    </template>
+
+
+                </div>
+            </div>
+
+            <div class="all-users-list" id="js-all-users-list">
+                <template id="userItemTemplate">
+                    <div class="all-users-list_item" id="js-all-users-list_item"></div>
+                </template>
+            </div>
+
+        </div>
+
+
+        <div class="chat-body" id="js-chat-body">
+            <div class="chat-body__header">
+                <div class="chat-body__header_name" id="js-chat-body-header-name"></div>
+                <div class="chat-body__close" id="js-chat-body-close"></div>
+            </div>
+            <div class="chat-body__history" id="js-chat-history">
+
+                <template id="messageTemplate">
+                    <div class="message">
+                        <div class="message__avatar">
+                            <img id="js-message-photo">
+                        </div>
+                        <div class="message__content">
+                            <div class="message__content_header">
+                                <div class="message__content_header_name" id="js-message-sender"></div>
+                                <div class="message__content_header_time" id="js-message-time"></div>
+                            </div>
+                            <div class="message__content_text" id="js-message-text"></div>
+                            <div class="delete-message" id="js-delete-message"></div>
+                        </div>
+                    </div>
+                </template>
+
+            </div>
+
+
+            <div class="chat-body__input-wr" id="js-message-input">
+                <div class="chat-body__input">
+                    <div class="chat-body__input-text" contenteditable="true"
+                         data-placeholder="Отправить сообщение..." id="js-message-input-text"></div>
+
+                    <button type="button" id="js-send-message-button">
+                        <div class="send-message-icon">
+                            <svg id="play" viewBox="0 0 163 163" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px">
+
+                                <g fill="none">
+                                    <g transform="translate(2.000000, 2.000000)" stroke-width="4">
+                                        <path d="M10,80 C10,118.107648 40.8923523,149 79,149 L79,149 C117.107648,149 148,118.107648 148,80 C148,41.8923523 117.107648,11 79,11"
+                                              id="lineOne" stroke="#A5CB43"></path>
+                                        <path d="M105.9,74.4158594 L67.2,44.2158594 C63.5,41.3158594 58,43.9158594 58,48.7158594 L58,109.015859 C58,113.715859 63.4,116.415859 67.2,113.515859 L105.9,83.3158594 C108.8,81.1158594 108.8,76.6158594 105.9,74.4158594 L105.9,74.4158594 Z"
+                                              id="triangle" stroke="#A3CD3A"></path>
+                                        <path d="M159,79.5 C159,35.5933624 123.406638,0 79.5,0 C35.5933624,0 0,35.5933624 0,79.5 C0,123.406638 35.5933624,159 79.5,159 L79.5,159"
+                                              id="lineTwo" stroke="#A5CB43"></path>
+                                    </g>
+                                </g>
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+
+</div>
+
+<script th:src="@{js/home.js}"></script>
+
+</body>
+</html>
+
+
+
+

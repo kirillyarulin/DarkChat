@@ -1,0 +1,152 @@
+.header{
+    min-width: 400px;
+}
+
+    .header-logo{}
+
+    .header-sign-up {
+        position: relative;
+        float: right;
+        margin: 10px 35px;
+        font-size: 28px;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+
+    .header-sign-up:visited {
+        color: white;
+    }
+
+    .header-sign-up:link {
+        color: white;
+    }
+
+    .header-sign-up:hover {
+        color: greenyellow;
+    }
+
+
+.main-wrapper {
+    min-width: 520px;
+
+}
+
+    .welcome-wr {
+        position: absolute;
+        width: 100%;
+        height: auto;
+        min-height: 600px;
+        top: 60px;
+        bottom: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+
+    .alert {
+        min-width: 450px;
+        margin-bottom: 50px;
+        text-align: center;
+        display: inline-block;
+        padding: 10px;
+        border-radius: 5px;
+        align-self: center;
+    }
+
+        .alert.alert-info {
+            background-color: rgba(41, 230, 48, 0.76);
+            color: rgb(254, 255, 245)
+        }
+
+        .alert.alert-danger{
+            background-color: rgba(255,6,0,0.76);
+        }
+
+    .crutch {
+        height: 36px;
+        margin-top: 50px;
+    }
+
+        .login-form-wr {
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            overflow: hidden;
+            border: 1px solid cyan;
+            position: relative;
+            align-self: center;
+        }
+
+            .login-form {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                font-family: Helvetica, serif;
+                color: #C2FFEC;
+                background: rgba(0,0,0,0.33);
+                padding: 30px 0;
+            }
+
+                .login-form h1 {
+                    text-align: center;
+                    margin-top: 15px;
+                    margin-bottom: 35px;
+                    font-size: 30px;
+                    font-weight: bold;
+
+                }
+
+                .login-form input {
+                    display:block;
+                    width:300px;
+                    margin:20px auto;
+                    padding:10px;
+                    background:rgba(255,255,255,0.15);
+                    color: #C2FFEC;
+                    border:0;
+                    font-size: 18px;
+                }
+
+                    ::-webkit-input-placeholder {
+                        color: #bcbcbc;
+                        opacity: 0.8;
+                    }
+
+                .login-form input:focus,.login-form input:active,.login-form button:focus,.login-form button:active{
+                    outline:none;
+                }
+                .login-form button{
+
+                    background: rgba(0,255,255,0.7);
+                    border:0;
+                    color:-moz-mac-accentdarkshadow;
+                    padding:10px;
+                    font-size:20px;
+                    width:330px;
+                    margin: 40px auto 30px;
+                    display:block;
+                    cursor:pointer;
+                }
+                .login-form button:active{
+                    background:greenyellow;
+                }
+                .login-form p{
+                    font-size:14px;
+                    text-align:center;
+                }
+                .login-form a{
+                    cursor:pointer;
+                    color:greenyellow;
+                    text-decoration: none;
+                }
+
+                .login-form a:visited {
+                    color: greenyellow;
+                }
+
+                .login-form a:link {
+                    color: greenyellow;
+                }
+

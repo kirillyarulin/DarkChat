@@ -1,0 +1,210 @@
+.header{}
+
+.header-logo{}
+
+.header-login {
+    float: right;
+    margin: 10px 35px;
+    font-size: 28px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.header-login:visited {
+    color: white;
+}
+
+.header-login:link {
+    color: white;
+}
+
+.header-login:hover {
+    color: greenyellow;
+}
+
+
+.main-wrapper {}
+
+.welcome-wr {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    min-height: 400px;
+    top: 60px;
+    bottom: 40px;
+    display: flex;
+    align-items: center;
+
+}
+
+.sign-up-form-wr {
+    width: 500px;
+    height: 540px;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid cyan;
+    position: relative;
+}
+
+.sign-up-form {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    font-family: Helvetica, serif;
+    color: #C2FFEC;
+    background: rgba(0,0,0,0.33);
+    padding: 30px 0;
+}
+
+.sign-up-form h1 {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 35px;
+    font-size: 30px;
+    font-weight: bold;
+
+}
+
+
+.sign-up-form input {
+    display:block;
+    width:380px;
+    margin:20px auto;
+    padding: 10px 40px 10px 10px;
+    background:rgba(255,255,255,0.15);
+    color: #C2FFEC;
+    border:0;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.sign-up-form input:valid[type="text"] ,
+.sign-up-form input:valid[type="password"] {
+    background: url("../img/icons/valid-field.png"),
+                rgba(255,255,255,0.15);;
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: 350px 13px;
+}
+
+::-webkit-input-placeholder {
+    color: #bcbcbc;
+    opacity: 0.8;
+    font-size: 18px;
+}
+
+.sign-up-form input:focus,.login-form input:active,.login-form button:focus,.login-form button:active{
+    outline:none;
+}
+
+
+.input-gender {
+    width:380px;
+    margin:20px auto;
+    text-align: center;
+    position: relative;
+}
+
+.input-gender label {
+    display: inline-block;
+    font-size: 20px;
+    margin-left: 3px;
+    margin-right: 3px;
+    color: gray;
+    font-weight: 600;
+    cursor: pointer;
+
+}
+
+.input-gender input {
+    display: none;
+}
+
+.input-gender input:checked ~ .input-gender-male {
+    color: cyan;
+}
+
+.input-gender input:checked ~ .input-gender-female {
+    color: #ff009a;
+}
+
+
+.sign-up-form input[type="url"] {
+    background: url("../img/icons/add-photo.png") ,
+    rgba(255,255,255,0.15);
+    background-size: 30px;
+    background-repeat: no-repeat;
+    background-position: 345px 7px;
+    padding-right: 50px;
+}
+.sign-up-form input[type="file"] {
+    display: none;
+}
+
+.input-photo {
+    position: relative;
+}
+
+.input-photo label {
+    position: absolute;
+    height: 43px;
+    width: 43px;
+    top: 0;
+    right: 59px;
+    cursor: pointer;
+}
+
+.sign-up-form button{
+
+    background: rgba(0,255,255,0.7);
+    border:0;
+    color:-moz-mac-accentdarkshadow;
+    padding:10px;
+    font-size:20px;
+    width:330px;
+    margin:30px auto;
+    display:block;
+    cursor:pointer;
+}
+.sign-up-form button:hover{
+    background:greenyellow;
+    opacity: 0.7;
+}
+
+
+.alert-container {
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+    z-index: 4;
+    cursor: pointer;
+}
+
+.alert-container div {
+    /*display: inline-block;*/
+    padding: 25px;
+    font-size: 22px;
+    border-radius: 5px;
+    border: 1px solid red;
+    background-color: rgba(43,42,44,0.85);
+    margin: auto;
+    align-self: center;
+    align-items: center;
+    z-index: 3;
+    cursor: pointer;
+    display: none;
+}
+
+.dark-background {
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    display: none;
+}
