@@ -146,7 +146,7 @@ function closeChat() {
     chatBody.style.display = "none";
 
     let chats = document.getElementsByClassName("chat-item");
-    for (var i = 0; i < chats.length; i++) {
+    for (let i = 0; i < chats.length; i++) {
         chats[i].classList.remove("active");
     }
 }
@@ -162,7 +162,7 @@ function deleteMessage(message) {
 
 function activateChat(chat) {
     let chats = document.getElementsByClassName("chat-item");
-    for (var i = 0; i < chats.length; i++) {
+    for (let i = 0; i < chats.length; i++) {
         if (getChatName(chat) !== chats[i].getElementsByClassName("chat-item__content_name")[0].innerText) {
             chats[i].classList.remove("active");
         } else {
@@ -208,7 +208,7 @@ function moveChatUp(chat) {
     let chatList = document.getElementById("js-chat-list");
     let chats = document.getElementsByClassName("chat-item");
     let chatItem;
-    for (var i = 0; i < chats.length; i++) {
+    for (let i = 0; i < chats.length; i++) {
         if (getChatName(chat) === chats[i].getElementsByClassName("chat-item__content_name")[0].innerText) {
             chatItem = chats[i];
             chatList.removeChild(chatItem);
@@ -265,7 +265,7 @@ function sendMessage() {
 function showLastMessage(chat, chatLastMessage) {
     let chats = document.getElementsByClassName("chat-item");
     let chatItem;
-    for (var i = 0; i < chats.length; i++) {
+    for (let i = 0; i < chats.length; i++) {
         if (getChatName(chat) === chats[i].getElementsByClassName("chat-item__content_name")[0].innerText) {
             chatItem = chats[i];
         }
@@ -290,12 +290,15 @@ function showMessage(message) {
     messageItem.getElementById("js-message-time").innerText = messageTime.getHours() + ":" + messageTime.getMinutes();
     chatHistory.appendChild(messageItem);
 
-    let elem = chatHistory.lastElementChild;
-
-    elem.addEventListener("click", function (ev2) {
-        deleteMessage(message);
-        hideMessage(elem);
-    });
+    if (message.sender.username === currentUser.username) {
+        let elem = chatHistory.lastElementChild;
+        elem.classList.add("current-user");
+        let delButton = elem.getElementsByClassName("delete-message")[0];
+        delButton.addEventListener("click", function (ev2) {
+            deleteMessage(message);
+            hideMessage(elem);
+        });
+    }
 
     rewindHistoryToDown()
 }

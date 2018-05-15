@@ -46,16 +46,4 @@ public class UserController {
 
     }
 
-    //todo
-//    @RequestMapping(method = RequestMethod.PUT, value = "/{userId}")
-//    public void updateUser(@PathVariable long userId,@RequestBody User user) {
-//        userService.updateUser(userId,user);
-//    }
-
-    //todo
-//    @RequestMapping(method = RequestMethod.DELETE, value = "{userId}")
-//    public void deleteUser(@PathVariable long userId) {
-//        userService.deleteUser(userId);
-//    }
-
 }

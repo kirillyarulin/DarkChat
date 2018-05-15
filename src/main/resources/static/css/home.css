@@ -309,8 +309,9 @@
 
                 }
 
-                .message:hover .delete-message{
+                .message.current-user:hover .delete-message {
                     background: url("../img/icons/trash.png") no-repeat;
+                    cursor: pointer;
                 }
 
                     .message__avatar {
@@ -373,7 +374,6 @@
                                 background-size: 18px;
                                 top: 2px;
                                 right: 0;
-                                cursor: pointer;
                                 background: none;
                             }
 

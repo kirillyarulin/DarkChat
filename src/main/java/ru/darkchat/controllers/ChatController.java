@@ -3,6 +3,7 @@ package ru.darkchat.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.darkchat.models.Chat;
@@ -23,7 +24,14 @@ public class ChatController {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/chats")
-    public ResponseEntity<Chat> createChat(@RequestBody Chat chat, BindingResult bindingResult) {
+    public ResponseEntity<Chat> createChat(@RequestBody Chat chat, BindingResult bindingResult, Authentication authentication) {
+
+        boolean isAccess = chat.getParticipants().stream()
+                .anyMatch(x -> x.getUsername().equals(authentication.getName()));
+        if (!isAccess) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+
         chatValidator.validate(chat,bindingResult);
 
         if (bindingResult.hasErrors()) {
@@ -34,9 +42,4 @@ public class ChatController {
         }
     }
 
-    //todo
-//    @RequestMapping(method = RequestMethod.DELETE, value = "/chats/{chatId}")
-//    public void deleteChat(@PathVariable long chatId) {
-//        chatService.deleteChat(chatId);
-//    }
 }
