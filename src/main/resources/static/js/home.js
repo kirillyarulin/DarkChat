@@ -40,22 +40,25 @@ window.onload = function (ev) {
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         stompClient.subscribe('/chat/messages', function (message) {
-            chatMessage = JSON.parse(message.body);
-            userChats.forEach(function (chat) {
-                if (chatMessage.chat.chatId === chat.chatId) {
-                    if (chat.messages === undefined) {
-                        chat.messages = getChatMessages(chat);
-                    } else {
-                        chat.messages.push(chatMessage);
+            resp = JSON.parse(message.body);
+            if (resp.statusCodeValue === 200) {
+                chatMessage = resp.body;
+                userChats.forEach(function (chat) {
+                    if (chatMessage.chat.chatId === chat.chatId) {
+                        if (chat.messages === undefined) {
+                            chat.messages = getChatMessages(chat);
+                        } else {
+                            chat.messages.push(chatMessage);
+                        }
+                        moveChatUp(chat);
+                        showLastMessage(chat, chatMessage);
                     }
-                    moveChatUp(chat);
-                    showLastMessage(chat, chatMessage);
-                }
-            });
+                });
 
-            if (currentChat !== undefined && currentChat.chatId === chatMessage.chat.chatId) {
-                showMessage(chatMessage);
-                moveChatHistory();
+                if (currentChat !== undefined && currentChat.chatId === chatMessage.chat.chatId) {
+                    showMessage(chatMessage);
+                    moveChatHistory();
+                }
             }
         });
 
