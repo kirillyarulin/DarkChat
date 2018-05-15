@@ -49,6 +49,8 @@ public class MessageController {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
 
+
+
         if (messageValidator.isValid(message)) {
             messageService.addMessage(message);
             return new ResponseEntity<>(message,HttpStatus.OK);

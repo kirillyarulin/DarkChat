@@ -2,10 +2,14 @@ package ru.darkchat.validators;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.validation.Errors;
-import org.springframework.validation.Validator;
+
+import ru.darkchat.models.Chat;
 import ru.darkchat.models.Message;
+import ru.darkchat.models.User;
+import ru.darkchat.services.ChatService;
 import ru.darkchat.services.UserService;
+
+import java.util.List;
 
 /**
  * Created by Kirill Yarulin on 15.05.18
@@ -21,8 +25,8 @@ public class MessageValidator {
     }
 
     public boolean isValid(Message message) {
-
         return message.getContent() != null && !message.getContent().trim().equals("")
-                && userService.existsUserByUsername(message.getSender().getUsername());
+                && userService.existsUserByUsername(message.getSender().getUsername())
+                && userService.getParticipantsOfChat(message.getChat().getId()).contains(message.getSender());
     }
 }

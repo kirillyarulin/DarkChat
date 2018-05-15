@@ -51,6 +51,10 @@ public class UserService {
 
     }
 
+    public List<User> getParticipantsOfChat(long chatId) {
+        return userRepository.getParticipantsOfChat(chatId);
+    }
+
     public boolean updateUser(long userId, User user) {
         if (userRepository.existsById(userId)) {
             user.setId(userId);
